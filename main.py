@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Cargar el archivo CSV
-df = pd.read_csv("taxi-all-23-1.csv")
+df = pd.read_csv("taxi-all-23-2.csv")
 
 # Mostrar el DataFrame en Streamlit
 st.title("Taxi-Cordoba")
@@ -69,13 +69,3 @@ plt.tight_layout()
 st.pyplot(fig)
 
 
-# Filtrar valores numéricos en la columna "Asiento" y eliminar los valores nulos
-valores_numericos = df['Asiento'].dropna().loc[df['Asiento'].apply(lambda x: str(x).isdigit())]
-
-# Contar la frecuencia de cada valor único
-conteo_valores = valores_numericos.value_counts()
-
-# Mostrar el conteo de valores con un subtítulo
-st.write("## Asiento vs Cantidad de Movimiento")
-st.write("Conteo de valores en la columna 'Asiento' (numéricos):")
-st.write(conteo_valores)
