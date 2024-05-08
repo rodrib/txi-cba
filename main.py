@@ -81,3 +81,9 @@ ax.set_ylabel('Frecuencia')
 
 # Mostrar el gráfico en Streamlit
 st.pyplot(fig)
+
+
+
+
+
+

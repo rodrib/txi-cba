@@ -32,3 +32,37 @@ plt.grid(True)
 
 # Mostrar la visualización en Streamlit
 st.pyplot(plt)
+
+
+# Ahora, realiza el análisis de datos financieros usando el CSV ya cargado
+# Definir las funciones de análisis de datos
+def cuentas_unicas(datos):
+    return datos['cuenta'].nunique()
+
+
+
+
+
+def cuenta_con_mayor_credito(datos):
+    return datos.loc[datos['credito'].idxmax()]['cuenta']
+
+def cuentas_mas_repetidas(datos, n=5):
+    cuentas_repetidas = datos['cuenta'].value_counts().head(n)
+    cuentas_destinatario = {}
+    for cuenta in cuentas_repetidas.index:
+        destinatario = datos[datos['cuenta'] == cuenta]['destinatario'].iloc[0]
+        cuentas_destinatario[cuenta] = destinatario
+    return cuentas_destinatario
+
+
+st.title("Análisis de datos financieros")
+
+# Botón para ejecutar el análisis
+if st.button("Realizar análisis"):
+    st.write("Número de cuentas únicas:", cuentas_unicas(df))
+    #st.write("Cuenta con mayor débito:", cuenta_con_mayor_debito(df))
+    #st.write("Cuenta con mayor crédito:", cuenta_con_mayor_credito(df))
+    st.write("5 primeras cuentas más repetidas:")
+    cuentas_repetidas = cuentas_mas_repetidas(df)
+    for cuenta, destinatario in cuentas_repetidas.items():
+        st.write(f"Cuenta: {cuenta}, Destinatario: {destinatario}")
